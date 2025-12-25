@@ -2,26 +2,19 @@
 
 
 ## Related
--
 
 ---
-
 <details>
-
 <summary>
   Research
 </summary>
-
 # How to Download YesPornPlease Videos: Technical Analysis of Stream Patterns, CDNs, and Download Methods
-
 *A comprehensive research document analyzing YesPornPlease's video infrastructure, embed patterns, stream formats, and optimal download strategies using modern tools*
-
 **Authors**: SERP Apps  
 **Date**: December 2025  
 **Version**: 1.0
-
 ---
-
+- [YesPornPlease Downloader gist](https://gist.github.com/devinschumacher/d00ab18b2d4da2d7588be23d8442351e)
 ## Abstract
 
 This research document provides a technical overview of YesPornPlease's video delivery pipeline, including KVS-style player configuration, HLS/MP4 assets, and CDN request patterns used for playback and downloads.
