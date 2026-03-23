@@ -1,342 +1,169 @@
-# YesPornPlease Downloader Browser Extension (Chrome, Firefox, Edge, Opera, Brave)
+# YesPornPlease Downloader (Browser Extension)
 
+> Download YesPornPlease videos as MP4 files from supported pages without leaving the browser.
 
-## Related
+YesPornPlease Downloader is a browser extension built for a site that often aggregates videos from multiple playback sources. Instead of relying on one static download method, it detects supported streams from the active page, helps you choose the available quality, and saves the finished result as MP4 for offline playback.
 
----
-<details>
-<summary>
-  Research
-</summary>
-# How to Download YesPornPlease Videos: Technical Analysis of Stream Patterns, CDNs, and Download Methods
-*A comprehensive research document analyzing YesPornPlease's video infrastructure, embed patterns, stream formats, and optimal download strategies using modern tools*
-**Authors**: SERP Apps  
-**Date**: December 2025  
-**Version**: 1.0
----
-- [YesPornPlease Downloader gist](https://gist.github.com/devinschumacher/d00ab18b2d4da2d7588be23d8442351e)
-## Abstract
+- Save supported YesPornPlease videos from watch pages
+- Handle mixed playback sources more cleanly than generic tools
+- Choose from the quality levels exposed by the player
+- Export MP4 files for easier playback and archiving
+- Keep the workflow inside the browser
 
-This research document provides a technical overview of YesPornPlease's video delivery pipeline, including KVS-style player configuration, HLS/MP4 assets, and CDN request patterns used for playback and downloads.
+## Links
+
+- :rocket: Get it here: [YesPornPlease Downloader](https://serp.ly/yespornplease-downloader)
+- :new: Latest release: [GitHub Releases](https://github.com/serpapps/yespornplease-downloader/releases/latest)
+- :question: Help center: [SERP Help](https://help.serp.co/en/)
+- :beetle: Report bugs: [GitHub Issues](https://github.com/serpapps/yespornplease-downloader/issues)
+- :bulb: Request features: [Feature Requests](https://github.com/serpapps/yespornplease-downloader/issues)
+
+## Preview
+
+![YesPornPlease Downloader workflow preview](assets/workflow-preview.webp)
 
 ## Table of Contents
 
-1. [Introduction](#1-introduction)
-2. [YesPornPlease Video Infrastructure Overview](#2-yespornplease-video-infrastructure-overview)
-3. [URL Patterns and Detection](#3-url-patterns-and-detection)
-4. [Stream Formats and CDN Analysis](#4-stream-formats-and-cdn-analysis)
-5. [yt-dlp Implementation Strategies](#5-yt-dlp-implementation-strategies)
-6. [FFmpeg Processing Techniques](#6-ffmpeg-processing-techniques)
-7. [Alternative Tools and Backup Methods](#7-alternative-tools-and-backup-methods)
-8. [YesPornPlease API Integration](#8-yespornplease-api-integration)
-9. [Implementation Recommendations](#9-implementation-recommendations)
-10. [Troubleshooting and Edge Cases](#10-troubleshooting-and-edge-cases)
-11. [Conclusion](#11-conclusion)
+- [Why YesPornPlease Downloader](#why-yespornplease-downloader)
+- [Features](#features)
+- [How It Works](#how-it-works)
+- [Step-by-Step Tutorial: How to Download Videos from YesPornPlease](#step-by-step-tutorial-how-to-download-videos-from-yespornplease)
+- [Supported Formats](#supported-formats)
+- [Who It's For](#who-its-for)
+- [Common Use Cases](#common-use-cases)
+- [Trial & Access](#trial--access)
+- [Troubleshooting](#troubleshooting)
+- [Installation Instructions](#installation-instructions)
+- [FAQ](#faq)
+- [License](#license)
+- [Notes](#notes)
+- [About YesPornPlease](#about-yespornplease)
 
----
+## Why YesPornPlease Downloader
 
-## 1. Introduction
+YesPornPlease acts like an aggregator, so one page may expose media differently from the next. That makes static download tools unreliable. Some pages rely on embedded players, some expose stream manifests, and some hide the real media source until the player starts.
 
-YesPornPlease is a video hosting site that commonly uses a KVS-style player configuration with MP4 and HLS variants. The site exposes direct media URLs in player configuration blocks or inline JavaScript, which can be extracted and downloaded with standard tooling.
+YesPornPlease Downloader is designed for that variability. It uses multi-source detection to cover flashvars, HTML5 video elements, and CDN-delivered streams. It monitors the active page, detects supported sources from the current playback flow, and exports the result as MP4 without forcing you to troubleshoot each page manually.
 
-### 1.1 Research Scope
+## Features
 
-- YesPornPlease watch pages and embed endpoints
-- Player configuration payloads (flashvars, JSON, or inline scripts)
-- HLS manifests and MP4 direct file URLs
-- Common CDN hostnames and URL query patterns
+- Detects supported YesPornPlease page media after playback starts
+- Multi-source detection covering flashvars, HTML5 video, and CDN monitoring
+- In-page download button built into the video player
+- Handles mixed source patterns more reliably than static downloaders
+- Converts HLS streams to standard MP4 files in-browser
+- Lists quality variants when the source exposes them
+- Right-click context menu for quick downloads
+- Exports MP4 files for offline playback
+- Auto-saves to an organized YesPornPlease subfolder in Downloads
+- Works on Chrome, Edge, Brave, Opera, Firefox, Whale, and Yandex
 
-### 1.2 Methodology
+## How It Works
 
-- Inspect player initialization scripts for video_url, hls, and file keys
-- Capture network requests while playback starts
-- Validate URLs with yt-dlp and ffprobe
-- Document stream variants by quality and codec
+1. Install the extension from the latest release.
+2. Open a YesPornPlease page and start the video.
+3. Let the extension detect the active media source.
+4. Open the popup or use the in-page download button on the player.
+5. Select the quality you want from the available resolutions.
+6. Start the download and wait for the MP4 export to finish.
+7. Save the finished file locally.
 
----
+## Step-by-Step Tutorial: How to Download Videos from YesPornPlease
 
-## 2. YesPornPlease Video Infrastructure Overview
+1. Install YesPornPlease Downloader in your browser.
+2. Open YesPornPlease and navigate to the page you want.
+3. Press play so the full media source is initialized.
+4. Click the in-page download button on the player, or open the extension popup.
+5. Review the detected stream and available quality options.
+6. Pick the quality you want if more than one resolution appears.
+7. Start the download and wait for the MP4 export to finish.
+8. Open the saved file from your Downloads/YesPornPlease folder.
 
-### 2.1 Video Hosting Types
+## Supported Formats
 
-- Direct MP4 files hosted on CDN
-- HLS streams exposed via m3u8 playlists
-- Thumbnail and preview assets hosted on static subdomains
+- Input: supported YesPornPlease video sources
+- Output: MP4
 
-### 2.2 CDN Architecture
+Saved files use MP4 so they are easier to replay on standard media players, move between devices, or archive locally.
 
-- Primary site domain: yespornplease.com
-- CDN patterns: cdn.yespornplease.com, s1.yespornplease.com, s2.yespornplease.com
-- KVS get_file endpoint as the gateway to media assets
+## Who It's For
 
-### 2.3 Video Processing Pipeline
+- Users saving supported YesPornPlease videos for offline viewing
+- People dealing with aggregator-style playback pages
+- Users who want a browser extension instead of manual extraction
+- Anyone archiving content they already have access to in the browser
+- Anyone organizing personal downloads into a cleaner local library
 
-1. User loads watch page
-2. Player script assembles flashvars / JSON config
-3. video_url or hls_url is resolved via get_file
-4. Client requests MP4 or m3u8 from CDN
+## Common Use Cases
 
-### 2.4 Access Control and Authentication
+- Save a YesPornPlease video for later viewing
+- Export a supported stream as MP4
+- Download the best quality exposed by the page
+- Avoid manually tracing through embedded playback setups
+- Keep local copies of videos before links disappear
 
-- Most public videos are accessible without auth
-- Some videos require session cookies or age gate confirmation
-- Signed URLs may expire; capture fresh URLs near download time
+## Trial & Access
 
----
+- Includes **3 free downloads** so you can test the workflow first
+- Email sign-in uses secure one-time password verification
+- No credit card required for the trial
+- Unlimited downloads are available with a paid license
 
-## 3. URL Patterns and Detection
+Start here: [https://serp.ly/yespornplease-downloader](https://serp.ly/yespornplease-downloader)
 
-### 3.1 Watch Page URL Patterns
+## Troubleshooting
 
-```
-https://yespornplease.com/video/<slug>/
-https://yespornplease.com/video/<id>/<slug>/
-https://yespornplease.com/videos/<slug>/
-```
+**Nothing is detected in the popup**  
+Press play first and wait until the page finishes initializing the active media source.
 
-### 3.2 Embed URL Patterns
+**The detected stream does not look correct**  
+Refresh the page and retry after playback starts again.
 
-```
-https://yespornplease.com/embed/<id>
-https://yespornplease.com/embed/<id>?autoplay=1
-```
+**No quality picker is shown**
+Some pages expose only one source. The extension can list only the variants the page provides.
 
-### 3.3 Direct Media and CDN URL Patterns
+**The download failed partway through**
+Check your connection and refresh the page before starting again.
 
-```
-https://yespornplease.com/get_file/<hash>/<id>/<quality>.mp4
-https://yespornplease.com/get_file/<hash>/<id>/playlist.m3u8
-https://cdn.yespornplease.com/videos/<id>/<file>.mp4
-```
+**The page requires account access**
+The extension only works on media you can already open and play in your active browser session.
 
-### 3.4 Regex Patterns for URL Extraction
+## Installation Instructions
 
-```regex
-yespornplease\.com/video/([A-Za-z0-9_-]+)
-yespornplease\.com/embed/([0-9]+)
-get_file/[^/]+/([0-9]+)/
-```
+1. Open the latest release page: [GitHub Releases](https://github.com/serpapps/yespornplease-downloader/releases/latest)
+2. Download the correct build for your browser.
+3. Install the extension.
+4. Open a YesPornPlease video page.
+5. Use the popup to detect and download the media.
 
-### 3.5 Command-line URL Extraction
+## FAQ
 
-```bash
-grep -oE "https?://[^'\" ]+\.(mp4|m3u8|m4s|ts)" page.html | sort -u
-grep -oE "yespornplease\.com/(video|embed)/[^'\" ]+" page.html | sort -u
-```
+**Can I download YesPornPlease videos as MP4?**  
+Yes. Supported downloads are exported as MP4 files.
 
----
+**Do I need extra software?**  
+No. Everything runs in the browser extension.
 
-## 4. Stream Formats and CDN Analysis
+**Why do some pages behave differently?**
+Because YesPornPlease can surface media through different source patterns depending on the page. Detection depends on the active playback flow.
 
-### 4.1 Stream Formats
+**Where are videos saved?**
+They are saved to your default Downloads location, typically inside a YesPornPlease subfolder.
 
-| Format | Extension | Notes |
-|--------|-----------|-------|
-| MP4 (progressive) | .mp4 | Direct file URLs; easiest to download |
-| HLS (adaptive) | .m3u8 | Playlist-based; download via yt-dlp or ffmpeg |
-| fMP4 segments | .m4s | Segmented assets referenced by HLS playlists |
+**Is my data safe?**
+Yes. Video processing happens entirely in your browser. Authentication uses secure OTP with no passwords stored.
 
-### 4.2 Typical Quality Ladder
+## License
 
-| Quality | Typical Resolution | Notes |
-|---------|--------------------|-------|
-| Low | 360p - 480p | Fast preview streams or mobile variants |
-| Medium | 720p | Common default for web playback |
-| High | 1080p+ | Available when source uploads are higher quality |
+This repository is distributed under the proprietary SERP Apps license in the [LICENSE](LICENSE) file. Review that file before copying, modifying, or redistributing any part of this project.
 
-### 4.3 CDN URL Construction and Query Parameters
+## Notes
 
-- get_file URLs often include a hash segment and short-lived tokens
-- Quality is commonly encoded in the filename or path
-- Referer and Origin headers can affect access
+- Only download content you own or have explicit permission to save
+- An internet connection is required for downloads
+- Quality depends on the media source exposed by YesPornPlease
+- Must press play before detection can begin
 
-### 4.4 Validation and Inspection Commands
+## About YesPornPlease
 
-```bash
-ffprobe -hide_banner -show_streams "video.mp4"
-ffprobe -hide_banner -show_format "video.mp4"
-ffprobe -hide_banner -i "playlist.m3u8"
-```
-
----
-
-## 5. yt-dlp Implementation Strategies
-
-yt-dlp can parse direct MP4 URLs or HLS manifests. Use cookies when content is gated and prefer format selection to control quality.
-
-### 5.1 Basic Usage
-
-```bash
-yt-dlp [OPTIONS] [--] URL [URL...]
-yt-dlp -F "https://example.com/watch/123"
-```
-
-### 5.2 Authentication and Cookies
-
-- Use --cookies-from-browser to re-use a logged-in session if required
-- Pass referer headers with --add-header when the CDN enforces origin checks
-
-### 5.3 Format Selection and Output Templates
-
-```bash
-yt-dlp -f bestvideo+bestaudio/best "URL"
-yt-dlp -o "%(title)s.%(ext)s" "URL"
-yt-dlp --download-archive archive.txt "URL"
-```
-
-### 5.4 Site-Specific Examples
-
-```bash
-yt-dlp "https://yespornplease.com/video/<slug>/"
-yt-dlp -F "https://yespornplease.com/video/<slug>/"
-yt-dlp -f best "https://yespornplease.com/video/<slug>/"
-```
-
-### 5.5 Batch and Archive Mode
-
-```bash
-yt-dlp -a urls.txt --download-archive archive.txt
-yt-dlp --no-overwrites --continue "URL"
-```
-
-### 5.6 Error Handling Patterns
-
-- Use --retries and --fragment-retries for flaky HLS
-- If 403/401 occurs, refresh cookies or add referer headers
-- Use --downloader aria2c for large MP4 files
-
----
-
-## 6. FFmpeg Processing Techniques
-
-FFmpeg is useful for remuxing HLS playlists into MP4 and validating codecs without re-encoding.
-
-### 6.1 Inspect and Validate Streams
-
-```bash
-ffprobe -hide_banner -i "playlist.m3u8"
-ffmpeg -i "playlist.m3u8" -c copy output.mp4
-```
-
-### 6.2 Common Remux and Repair Patterns
-
-```bash
-ffmpeg -i "playlist.m3u8" -c copy output.mp4
-ffmpeg -i input.mp4 -c copy -movflags +faststart output.mp4
-ffprobe -hide_banner -show_streams output.mp4
-```
-
----
-
-## 7. Alternative Tools and Backup Methods
-
-### 7.1 Streamlink
-
-```bash
-streamlink "https://yespornplease.com/video/<slug>/" best -o output.mp4
-streamlink --loglevel debug "URL" best
-```
-
-### 7.2 aria2c
-
-```bash
-aria2c -o video.mp4 "https://cdn.yespornplease.com/videos/<id>/<file>.mp4"
-aria2c -i urls.txt -j 4
-```
-
-### 7.3 gallery-dl
-
-```bash
-gallery-dl "https://yespornplease.com/video/<slug>/"
-gallery-dl -g "URL"
-```
-
-### 7.4 Browser DevTools
-
-- Filter Network tab for m3u8, mp4, or get_file requests
-- Check player initialization scripts for video_url or hls_url
-- Copy request URL as cURL to preserve headers
-
----
-
-## 8. YesPornPlease API Integration
-
-### 8.1 Known Endpoints
-
-- None documented; rely on page and player data extraction
-
-### 8.2 Example Requests
-
-```
-# No public API calls identified; extract URLs from HTML/player data
-```
-
-### 8.3 Token and Session Handling
-
-- Many KVS deployments do not expose a documented API
-- If a tokenized endpoint exists, capture it from the player payload
-
----
-
-## 9. Implementation Recommendations
-
-### 9.1 Detection Hierarchy
-
-- Parse inline player config for direct MP4 URLs
-- Fallback to HLS playlist URLs (m3u8)
-- If both are absent, scan Network logs for get_file requests
-
-### 9.2 Site-Specific Notes
-
-- Prefer direct MP4 when available for fastest downloads
-- Cache resolved URLs briefly; refresh if tokenized
-- Surface download buttons near player and in grids where possible
-
-### 9.3 Storage and Naming Strategy
-
-- Use %(title)s.%(ext)s output templates to preserve context
-- Store archives to prevent duplicate downloads
-
----
-
-## 10. Troubleshooting and Edge Cases
-
-- HLS playlists may rotate segments; retry on 404
-- Age-gate or consent modals can block player config
-- Some videos are externally embedded and require provider-specific handling
-
----
-
-## 11. Conclusion
-
-YesPornPlease uses a KVS-style delivery model with MP4 and HLS variants. A robust downloader should first parse player config for direct media URLs, then fall back to HLS manifests and network inspection. yt-dlp remains the primary extraction tool, with ffmpeg and streamlink as reliable backups.
-
-| Tool | Best Use Case | Notes |
-|------|---------------|-------|
-| yt-dlp | Primary downloader for MP4/HLS | Supports cookies, format selection, retries |
-| ffmpeg | Remuxing and validation | Useful for HLS to MP4 conversion |
-| streamlink | Live/HLS fallback | Streams to file or pipes into ffmpeg |
-| aria2c | Multi-connection HTTP/HLS downloads | Good for large files and retries |
-| gallery-dl | Image-first or gallery-heavy sites | Best for gallery or attachment extraction |
-
-
----
-
-## Disclaimer and Ethical Use
-
-This document is provided for lawful, personal, or authorized use cases only. Always respect the site terms of service, content creator rights, and applicable laws. If DRM or explicit access controls are present, do not attempt to bypass them; use official downloads or creator-provided access instead.
-
-## Last Updated
-
-December 2025
-
-## Next Review
-
-90 days from last update or when site playback changes are observed.
-
-## Related
-
-- SERP Apps research index (internal)
-- SERP extension downloaders (internal)
-
-</details>
+YesPornPlease aggregates video content from multiple playback sources and embed styles. YesPornPlease Downloader is built to make supported downloads easier when you already have access to the video in your browser.
