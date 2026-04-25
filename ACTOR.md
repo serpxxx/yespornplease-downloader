@@ -1,4 +1,4 @@
-# YesPornPlease Downloader
+# YesPornPlease Downloader Browser Extension
 
 > Download YesPornPlease videos as MP4 files from supported pages without leaving the browser.
 
