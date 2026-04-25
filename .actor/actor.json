@@ -5,6 +5,6 @@
   "input": "./INPUT_SCHEMA.json",
   "name": "yespornplease-downloader",
   "readme": "../ACTOR.md",
-  "title": "Yespornplease Downloader",
+  "title": "YesPornPlease Downloader Browser Extension",
   "version": "0.0"
 }
