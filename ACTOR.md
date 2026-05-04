@@ -1,8 +1,12 @@
-# YesPornPlease Downloader
+# YesPornPlease Video Downloader | How to Download YesPornPlease Videos
 
 > Download YesPornPlease videos as MP4 files from supported pages without leaving the browser.
 
-![Yespornplease Downloader](https://raw.githubusercontent.com/serpxxx/yespornplease-downloader/main/assets/workflow-preview.webp)
+## Get it Here
+
+Get it here: https://serp.ly/yespornplease-downloader
+
+![YesPornPlease Downloader](https://raw.githubusercontent.com/serpxxx/yespornplease-downloader/main/assets/workflow-preview.webp)
 
 YesPornPlease Downloader is a browser extension built for a site that often aggregates videos from multiple playback sources. Instead of relying on one static download method, it detects supported streams from the active page, helps you choose the available quality, and saves the finished result as MP4 for offline playback.
 
@@ -11,11 +15,6 @@ YesPornPlease Downloader is a browser extension built for a site that often aggr
 - Choose from the quality levels exposed by the player
 - Export MP4 files for easier playback and archiving
 - Keep the workflow inside the browser
-
-## Get it Here
-
-Get it here: https://serp.ly/yespornplease-downloader
-
 ## Table of Contents
 
 - [Why YesPornPlease Downloader](#why-yespornplease-downloader)
