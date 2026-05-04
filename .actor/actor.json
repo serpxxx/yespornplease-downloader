@@ -1,10 +1,10 @@
 {
   "actorSpecification": 1,
   "buildTag": "latest",
-  "description": "Yespornplease Downloader gives you a fast, reliable way to save Yespornplease videos for offline access. Use it to archive content you own or have permission to access, prep deliverables, or keep a personal library available when you are offline.",
+  "description": "YesPornPlease Downloader helps users save accessible videos for authorized offline viewing.",
   "input": "./INPUT_SCHEMA.json",
   "name": "yespornplease-downloader",
   "readme": "../ACTOR.md",
-  "title": "YesPornPlease Downloader",
+  "title": "YesPornPlease Video Downloader | Download YesPornPlease Videos",
   "version": "0.0"
 }
